@@ -25,3 +25,18 @@ What is the backlog for getting help with an issue?
 
 Who can I contact if it is an emergency?
 
+
+Response:
+
+Status: Good | Degraded | Failing 
+
+Backlog: {
+    numberOfIssuesNotChecked: 99,
+    numberofIssuesInProcess: 22,
+}
+
+emergencyContact: {
+    name: "Jennifer",
+    email: j@aol.com,
+    phone: 555-1212
+}
