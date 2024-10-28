@@ -26,3 +26,5 @@ app.MapControllers(); // reflection portion - create a "routing table"
 
 
 app.Run(); // this is where the application starts running. It is a big while(true) { }
+
+public partial class Program { }
