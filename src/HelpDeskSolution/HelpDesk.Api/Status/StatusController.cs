@@ -7,6 +7,21 @@ public class StatusController : ControllerBase
     [HttpGet("/status")]
     public async Task<ActionResult> GetTheStatus()
     {
-        return Ok();
+        var fakeResponse = new StatusResponseModel
+        {
+            State = StatusState.Good,
+            BacklogInfo = new Backlog
+            {
+                NumberOfIssuesInProcess = 99,
+                NumberOfIssuesNotChecked = 22
+            },
+            EmergencyContact = new EmergencyContactInfo
+            {
+                Name = "Jeff",
+                EmailAddress = "jeff@company.com",
+                PhoneNumber = "555-1212"
+            }
+        };
+        return Ok(fakeResponse);
     }
 }
