@@ -30,5 +30,18 @@ public class UserOpeningAnIssue
         Assert.Equal(issueToPost.Description, returnedBody.Description);
         Assert.Equal(IssueStatus.Pending, IssueStatus.Pending);
 
+        var lookupUrl = $"/user/software/3e933fca-8191-4ebe-b064-45f4c1cb91da/issues/{returnedBody.Id}";
+        var lookupResponse = await host.Scenario(api =>
+        {
+            api.Get.Url(lookupUrl);
+            api.StatusCodeShouldBeOk();
+        });
+
+        Assert.NotNull(lookupResponse);
+        var lookupBody = await lookupResponse.ReadAsJsonAsync<IssueResponseModel>();
+
+        Assert.NotNull(lookupBody);
+        Assert.Equal(returnedBody, lookupBody);
+
     }
 }

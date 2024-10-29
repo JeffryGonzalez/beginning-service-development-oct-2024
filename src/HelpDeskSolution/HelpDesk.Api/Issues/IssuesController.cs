@@ -1,5 +1,6 @@
 ﻿using Marten;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace HelpDesk.Api.Issues;
 
@@ -12,7 +13,10 @@ public class IssuesController(IDocumentSession session) : ControllerBase
        [FromRoute] Guid softwareId
         )
     {
-
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
         // Rules here - You have to authenticated (only employees can do this)
         // You have to give us a piece of software we support
         // You have to give us a description of that software (10-1024)
@@ -84,6 +88,7 @@ public class IssuesController(IDocumentSession session) : ControllerBase
 
 public record IssueCreateModel
 {
+    [Required, MinLength(10), MaxLength(1024)]
     public string Description { get; set; } = string.Empty;
 }
 

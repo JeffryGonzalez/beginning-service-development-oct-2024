@@ -9,5 +9,5 @@ POST {{HelpDesk.Api_HostAddress}}/user/software/3e933fca-8191-4ebe-b064-45f4c1cb
 Content-Type: application/json
 
 {
-  "description": "Thing is broke"
+  "description": "sux"
 }
