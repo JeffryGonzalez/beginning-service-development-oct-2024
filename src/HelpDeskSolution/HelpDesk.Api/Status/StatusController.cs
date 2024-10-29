@@ -22,6 +22,6 @@ public class StatusController : ControllerBase
                 PhoneNumber = "555-1212"
             }
         };
-        return Ok(fakeResponse);
+        return Ok(fakeResponse); // turn this into JSON (serializing) to send to the client.
     }
 }

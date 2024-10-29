@@ -11,7 +11,7 @@ public class GettingTheStatus
     public async Task Works()
     {
         // Given
-        var host = await AlbaHost.For<Program>();
+        var host = await AlbaHost.For<Program>(); // this "starts up your API"
         var expectedResponse = new StatusResponseModel
         {
             State = StatusState.Good,
