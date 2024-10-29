@@ -1,4 +1,8 @@
+using FluentValidation;
+using HelpDesk.Api.Issues;
+using HelpDesk.Api.Issues.Services;
 using Marten;
+using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.FeatureManagement;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +22,9 @@ builder.Services.AddMarten(options =>
     options.Connection(connectionString);
 }).UseLightweightSessions();
 
+builder.Services.AddScoped<UserIssuesManager>();
+builder.Services.AddValidatorsFromAssemblyContaining<IssueCreateModelValidations>();
+builder.Services.AddFluentValidationRulesToSwagger();
 // above here (above the builder.Build()) is the behind the scenes configuration of the services our API has.
 var app = builder.Build();
 // after this is configuring how HTTP requests are handled and responses are created.

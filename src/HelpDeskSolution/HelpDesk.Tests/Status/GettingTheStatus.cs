@@ -7,6 +7,7 @@ using NSubstitute;
 namespace HelpDesk.Tests.Status;
 public class GettingTheStatus
 {
+
     /*GET {{HelpDesk.Api_HostAddress}}/status */
 
     [Fact]

@@ -6,6 +6,25 @@ namespace HelpDesk.Tests.Issues;
 public class UserOpeningAnIssue
 {
 
+
+    [Fact]
+    [Trait("Category", "SystemTest")]
+    [Trait("Feature", "Status")]
+    public async Task ValidationsApplied()
+    {
+        var host = await AlbaHost.For<Program>();
+        var issueToPost = new IssueCreateModel { Description = "" };
+
+
+
+        var response = await host.Scenario(api =>
+        {
+
+            api.Post.Json(issueToPost).ToUrl("/user/software/3e933fca-8191-4ebe-b064-45f4c1cb91da/issues");
+            api.StatusCodeShouldBe(400);
+        });
+    }
+
     [Fact]
     public async Task UserCanOpenAnIssue()
     {
