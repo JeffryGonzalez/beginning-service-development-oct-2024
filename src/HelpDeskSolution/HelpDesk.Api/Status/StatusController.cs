@@ -1,12 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.FeatureManagement.Mvc;
 
 namespace HelpDesk.Api.Status;
 
-public class StatusController : ControllerBase
+public class StatusController(
+    ILookupEmergencyContacts emergencyContactLookup
+) : ControllerBase
 {
+    //private ILookupEmergencyContacts emergencyContactLookup;
+
+    //public StatusController(ILookupEmergencyContacts emergencyContactLookup)
+    //{
+    //    this.emergencyContactLookup = emergencyContactLookup;
+    //}
+
+
+    [FeatureGate("Status")]
     [HttpGet("/status")]
     public async Task<ActionResult> GetTheStatus()
     {
+
+
         var fakeResponse = new StatusResponseModel
         {
             State = StatusState.Good,
@@ -15,12 +29,7 @@ public class StatusController : ControllerBase
                 NumberOfIssuesInProcess = 99,
                 NumberOfIssuesNotChecked = 22
             },
-            EmergencyContact = new EmergencyContactInfo
-            {
-                Name = "Jeff",
-                EmailAddress = "jeff@company.com",
-                PhoneNumber = "555-1212"
-            }
+            EmergencyContact = await emergencyContactLookup.GetCurrentContactAsync()
         };
         return Ok(fakeResponse); // turn this into JSON (serializing) to send to the client.
     }

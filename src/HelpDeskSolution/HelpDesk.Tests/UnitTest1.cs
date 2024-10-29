@@ -3,6 +3,7 @@ namespace HelpDesk.Tests;
 public class UnitTest1
 {
     [Fact]
+    [Trait("Category", "Unit")]
     public void CanAddTenAndTwenty()
     {
         // "Given" (arrange the context of the test)
@@ -19,6 +20,7 @@ public class UnitTest1
     [InlineData(10, 20, 30)]
     [InlineData(2, 2, 4)]
     [InlineData(10, 3, 13)]
+    [Trait("Category", "Unit")]
     public void CanAddAnyTwoIntegers(int a, int b, int expected)
     {
         var answer = a + b;

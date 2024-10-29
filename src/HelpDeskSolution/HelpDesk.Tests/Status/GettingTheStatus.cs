@@ -1,6 +1,8 @@
 ﻿
 using Alba;
 using HelpDesk.Api.Status;
+using Microsoft.Extensions.DependencyInjection;
+using NSubstitute;
 
 namespace HelpDesk.Tests.Status;
 public class GettingTheStatus
@@ -8,10 +10,28 @@ public class GettingTheStatus
     /*GET {{HelpDesk.Api_HostAddress}}/status */
 
     [Fact]
-    public async Task Works()
+    [Trait("Category", "SystemTest")]
+    [Trait("Feature", "Status")]
+    public async Task CanGetTheStatus()
     {
         // Given
-        var host = await AlbaHost.For<Program>(); // this "starts up your API"
+        var host = await AlbaHost.For<Program>(
+            options =>
+            {
+                options.ConfigureServices(services =>
+                {
+                    var fakeLookup = Substitute.For<ILookupEmergencyContacts>();
+                    fakeLookup.GetCurrentContactAsync().Returns(new EmergencyContactInfo
+                    {
+                        Name = "Jeff",
+                        EmailAddress = "jeff@company.com",
+                        PhoneNumber = "555-1212"
+                    });
+                    services.AddScoped<ILookupEmergencyContacts>(sp => fakeLookup);
+                });
+            }
+
+            ); // this "starts up your API"
         var expectedResponse = new StatusResponseModel
         {
             State = StatusState.Good,
@@ -41,5 +61,19 @@ public class GettingTheStatus
         var deserializedResponse = await actualResponse.ReadAsJsonAsync<StatusResponseModel>();
 
         Assert.Equal(expectedResponse, deserializedResponse);
+    }
+}
+
+// this is unused - I am using a test double above with nsubstitute
+public class DummySupportLookup : ILookupEmergencyContacts
+{
+    public async Task<EmergencyContactInfo> GetCurrentContactAsync()
+    {
+        return new EmergencyContactInfo
+        {
+            Name = "Jeff",
+            EmailAddress = "jeff@company.com",
+            PhoneNumber = "555-1212"
+        };
     }
 }
