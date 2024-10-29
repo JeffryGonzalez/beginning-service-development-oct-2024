@@ -1,0 +1,48 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
+  "elements": [
+    {
+      "id": "mXlZo5XeUdssaLMaeZ_hU",
+      "type": "text",
+      "x": 506,
+      "y": 280,
+      "width": 779.0593872070312,
+      "height": 200,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 218936291,
+      "version": 177,
+      "versionNonce": 2124558797,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1730224158976,
+      "link": null,
+      "locked": false,
+      "text": "\"DRY - Don't repeat yourself\"\n\n\"Most API design issues can and should be solved by adding another resource\"\n    - Steve Klabnik\n\nThe URI is our primary design tool.\n\n",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 193,
+      "containerId": null,
+      "originalText": "\"DRY - Don't repeat yourself\"\n\n\"Most API design issues can and should be solved by adding another resource\"\n    - Steve Klabnik\n\nThe URI is our primary design tool.\n\n",
+      "lineHeight": 1.25
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}

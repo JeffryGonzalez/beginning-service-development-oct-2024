@@ -5,10 +5,9 @@ Accept: application/json
 
 ### 
 
-POST {{HelpDesk.Api_HostAddress}}/issues
+POST {{HelpDesk.Api_HostAddress}}/user/software/3e933fca-8191-4ebe-b064-45f4c1cb91da/issues
 Content-Type: application/json
 
 {
-    "software": "8398398",
-    "description": "Thing broke"
+  "description": "Thing is broke"
 }

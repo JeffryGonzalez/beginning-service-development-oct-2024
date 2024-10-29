@@ -27,6 +27,8 @@ Operands:
 
 GET /software  - every piece of software in our catalog
 
+GET /software?user=bob_smith
+
 GET /user/software - the subset of /software that the calling user has access to.
 
 POST /user/software/{idOfSoftware}/issues
@@ -40,6 +42,12 @@ Content-Type: application/json
 
 `service.AddIssue("x9999", "word-2023", "I want clippy back")` - POST /issues
 
+POST /user/software/{id}/issues/{id}/impact
+
+{
+
+    "workStoppage": true
+}
 
 Resources - "Important thingies" - nouns.
     - Collections (/employees)

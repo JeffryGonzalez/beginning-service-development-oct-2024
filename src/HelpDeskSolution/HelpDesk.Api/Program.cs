@@ -1,3 +1,4 @@
+using Marten;
 using Microsoft.FeatureManagement;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +11,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Hey API, if anything you create needs an ILookupEmergencyContacts, use DummyEmergencyLookupThing
-
-
+var connectionString = builder.Configuration.GetConnectionString("issues") ?? throw new Exception("Don't start this API, there is no connection strings");
+Console.WriteLine(connectionString);
+builder.Services.AddMarten(options =>
+{
+    options.Connection(connectionString);
+}).UseLightweightSessions();
 
 // above here (above the builder.Build()) is the behind the scenes configuration of the services our API has.
 var app = builder.Build();
