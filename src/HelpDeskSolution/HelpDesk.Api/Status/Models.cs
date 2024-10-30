@@ -21,12 +21,7 @@ public record Backlog
     public int NumberOfIssuesInProcess { get; init; }
 }
 
-public record EmergencyContactInfo
-{
-    public string Name { get; init; } = string.Empty;
-    public string EmailAddress { get; init; } = string.Empty;
-    public string PhoneNumber { get; init; } = string.Empty;
-}
+
 
 public record StatusResponseModel
 {
