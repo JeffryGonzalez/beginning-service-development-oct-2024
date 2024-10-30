@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: on-call-api-ingress
+  labels:
+    name: on-call-api-ingress
+spec:
+  rules:
+  - host: api.hypertheory.com
+    https:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: on-call-api-service
+            port: 
+              number: 443
