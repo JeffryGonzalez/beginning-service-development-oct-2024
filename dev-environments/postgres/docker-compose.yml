@@ -1,4 +1,9 @@
 services:
+
+  oncall:
+    image: jeffrygonzalez/oncallapi-oct-2024:v1.1
+    ports: 
+      - 1338:8080
   db:
     image: postgres:16.2-bullseye
     restart: always

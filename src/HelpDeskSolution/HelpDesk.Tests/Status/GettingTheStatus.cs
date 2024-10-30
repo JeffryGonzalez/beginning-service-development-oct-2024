@@ -1,8 +1,6 @@
 ﻿
 using Alba;
 using HelpDesk.Api.Status;
-using Microsoft.Extensions.DependencyInjection;
-using NSubstitute;
 
 namespace HelpDesk.Tests.Status;
 public class GettingTheStatus
@@ -19,17 +17,7 @@ public class GettingTheStatus
         var host = await AlbaHost.For<Program>(
             options =>
             {
-                options.ConfigureServices(services =>
-                {
-                    var fakeLookup = Substitute.For<ILookupEmergencyContacts>();
-                    fakeLookup.GetCurrentContactAsync().Returns(new EmergencyContactInfo
-                    {
-                        Name = "Jeff",
-                        EmailAddress = "jeff@company.com",
-                        PhoneNumber = "555-1212"
-                    });
-                    services.AddScoped<ILookupEmergencyContacts>(sp => fakeLookup);
-                });
+
             }
 
             ); // this "starts up your API"

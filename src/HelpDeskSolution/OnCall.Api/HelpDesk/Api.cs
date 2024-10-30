@@ -33,8 +33,8 @@ public static class Api
         {
             var response = new EmergencyContactInfo()
             {
-                Name = "Support Pros",
-                PhoneNumber = "888 GET-HELP",
+                Name = "Support Professionals",
+                PhoneNumber = "888 GET-LOST",
                 EmailAddress = "help@fake-support.com"
             };
             return Results.Ok(response);
