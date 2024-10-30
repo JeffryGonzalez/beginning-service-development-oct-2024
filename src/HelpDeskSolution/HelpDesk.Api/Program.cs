@@ -1,6 +1,8 @@
 using FluentValidation;
 using HelpDesk.Api.Issues;
 using HelpDesk.Api.Issues.Services;
+using HelpDesk.Api.Status;
+using HelpDesk.Api.Status.Services;
 using Marten;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.FeatureManagement;
@@ -22,6 +24,18 @@ builder.Services.AddMarten(options =>
     options.Connection(connectionString);
 }).UseLightweightSessions();
 
+var onCallApiUrl = builder.Configuration.GetValue<string>("onCallAddress") ?? throw new Exception("No URL for on Call Api");
+
+builder.Services.AddHttpClient<OnCallApiClient>(client =>
+{
+    client.BaseAddress = new Uri(onCallApiUrl);
+});
+
+//builder.Services.AddScoped<ILookupEmergencyContacts, OnCallApiClient>();
+builder.Services.AddScoped<ILookupEmergencyContacts>(sp =>
+{
+    return sp.GetRequiredService<OnCallApiClient>();
+});
 builder.Services.AddScoped<UserIssuesManager>();
 builder.Services.AddValidatorsFromAssemblyContaining<IssueCreateModelValidations>();
 builder.Services.AddFluentValidationRulesToSwagger();
