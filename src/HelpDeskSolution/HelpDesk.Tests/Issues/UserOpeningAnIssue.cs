@@ -3,8 +3,13 @@ using Alba;
 using HelpDesk.Api.Issues;
 
 namespace HelpDesk.Tests.Issues;
-public class UserOpeningAnIssue
+public class UserOpeningAnIssue : IAsyncLifetime
 {
+    private IAlbaHost host = null!;
+    public async Task InitializeAsync()
+    {
+        host = await AlbaHost.For<Program>();
+    }
 
 
     [Fact]
@@ -12,7 +17,7 @@ public class UserOpeningAnIssue
     [Trait("Feature", "Status")]
     public async Task ValidationsApplied()
     {
-        var host = await AlbaHost.For<Program>();
+
         var issueToPost = new IssueCreateModel { Description = "" };
 
 
@@ -28,7 +33,7 @@ public class UserOpeningAnIssue
     [Fact]
     public async Task UserCanOpenAnIssue()
     {
-        var host = await AlbaHost.For<Program>();
+
         var issueToPost = new IssueCreateModel { Description = "Won't Start" };
 
 
@@ -62,5 +67,11 @@ public class UserOpeningAnIssue
         Assert.NotNull(lookupBody);
         Assert.Equal(returnedBody, lookupBody);
 
+    }
+
+
+    public async Task DisposeAsync()
+    {
+        await host.DisposeAsync();
     }
 }

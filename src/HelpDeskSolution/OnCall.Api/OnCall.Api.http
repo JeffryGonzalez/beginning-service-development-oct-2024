@@ -1,0 +1,6 @@
+@OnCall.Api_HostAddress = http://localhost:5023
+
+GET {{OnCall.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

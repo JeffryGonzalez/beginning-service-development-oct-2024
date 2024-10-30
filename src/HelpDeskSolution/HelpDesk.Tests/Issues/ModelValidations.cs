@@ -1,7 +1,7 @@
 ﻿using FluentValidation.TestHelper;
 using HelpDesk.Api.Issues;
 
-namespace HelpDesk.Tests.Status;
+namespace HelpDesk.Tests.Issues;
 public class ModelValidations
 {
     [Theory]
